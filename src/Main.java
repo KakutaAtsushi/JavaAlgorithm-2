@@ -11,23 +11,35 @@ public class Main {
     public void multiplexMath() {
         Scanner scanner = new Scanner(System.in);
         String receiveString = scanner.next();
+        if (operandChecker(receiveString).equals("Error")) {
+            System.out.println("Error");
+            return;
+        }
+
+        left = Integer.parseInt(receiveString.substring(0, receiveString.indexOf(operandChecker(receiveString))));
+        right = Integer.parseInt(receiveString.substring(receiveString.indexOf(operandChecker(receiveString)) + 1));
         if (receiveString.contains("+")) {
-            left = Integer.parseInt(receiveString.substring(0, receiveString.indexOf("+")));
-            right = Integer.parseInt(receiveString.substring(receiveString.indexOf("+") + 1));
             System.out.println(plusOperand());
         } else if (receiveString.contains("-")) {
-            left = Integer.parseInt(receiveString.substring(0, receiveString.indexOf("-")));
-            right = Integer.parseInt(receiveString.substring(receiveString.indexOf("-") + 1));
             System.out.println(minusOperand());
         } else if (receiveString.contains("*")) {
-            left = Integer.parseInt(receiveString.substring(0, receiveString.indexOf("*")));
-            right = Integer.parseInt(receiveString.substring(receiveString.indexOf("*") + 1));
             System.out.println(multiplicationOperand());
         } else if (receiveString.contains("/")) {
-            left = Integer.parseInt(receiveString.substring(0, receiveString.indexOf("/")));
-            right = Integer.parseInt(receiveString.substring(receiveString.indexOf("/") + 1));
             System.out.println(quotientOperand());
         }
+    }
+
+    private static String operandChecker(String receiveString) {
+        if (receiveString.contains("+")) {
+            return "+";
+        } else if (receiveString.contains("-")) {
+            return "-";
+        } else if (receiveString.contains("*")) {
+            return "*";
+        } else if (receiveString.contains("/")) {
+            return "/";
+        }
+        return "Error";
     }
 
     private static int plusOperand() {
@@ -45,16 +57,5 @@ public class Main {
     private static int quotientOperand() {
         return left / right;
     }
-
-//    public int math() {
-//        Scanner scanner = new Scanner(System.in);
-//        int left = scanner.nextInt();
-//        int right = scanner.nextInt();
-//        int total = left + right;
-//        if (left <= -10000 || right >= 10000 || total >= -10000 && total <= 10000) {
-//            return total;
-//        }
-//        return 0;
-//    }
 }
 
